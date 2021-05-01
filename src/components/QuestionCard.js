@@ -1,5 +1,17 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { increaseScoreAC } from './../store/actions';
+
 const QuestionCard = ({ data }) => {
   console.log(data);
+
+  const dispatch = useDispatch();
+
+  const acceptAnswer = (e) => {
+    // console.log(e.target.value);
+    if (e.target.value === data.correct_answer) {
+      dispatch(increaseScoreAC());
+    }
+  };
 
   return (
     <div className="card">
@@ -9,7 +21,10 @@ const QuestionCard = ({ data }) => {
         data.answers.map((answer) => {
           return (
             <div>
-              <button>{answer}</button>;
+              <button value={answer} onClick={acceptAnswer}>
+                {answer}
+              </button>
+              ;
             </div>
           );
         })}

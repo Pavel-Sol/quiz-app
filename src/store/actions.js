@@ -1,4 +1,4 @@
-import { SET_DATA, GET_NEXT_QUESTION } from './type';
+import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE } from './type';
 import { shuffleArray } from './../utils';
 
 export const setDataAC = (payload) => {
@@ -26,5 +26,11 @@ export const fetchQuizQuestions = () => {
     }));
 
     dispatch(setDataAC(questionsWithMixedAnswers));
+  };
+};
+
+export const increaseScoreAC = () => {
+  return {
+    type: INCREASE_SCORE,
   };
 };
