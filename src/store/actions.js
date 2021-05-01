@@ -1,9 +1,16 @@
-import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE, SET_ANSWER } from './type';
+import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE, SET_ANSWER, RESET_DATA } from './type';
 import { shuffleArray } from './../utils';
 
 export const setDataAC = (payload) => {
   return {
     type: SET_DATA,
+    payload,
+  };
+};
+
+export const resetDataAC = (payload) => {
+  return {
+    type: RESET_DATA,
     payload,
   };
 };
