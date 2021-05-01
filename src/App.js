@@ -1,6 +1,6 @@
 import QuestionCard from './components/QuestionCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { getNextQuestionAC, fetchQuizQuestions } from './store/actions';
+import { getNextQuestionAC, fetchQuizQuestions, setAnswerAC } from './store/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ function App() {
 
   const getNextQuestion = () => {
     dispatch(getNextQuestionAC());
+    dispatch(setAnswerAC(''));
   };
 
   const startGame = () => {

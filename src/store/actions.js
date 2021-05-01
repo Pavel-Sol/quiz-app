@@ -1,4 +1,4 @@
-import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE } from './type';
+import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE, SET_ANSWER } from './type';
 import { shuffleArray } from './../utils';
 
 export const setDataAC = (payload) => {
@@ -32,5 +32,12 @@ export const fetchQuizQuestions = () => {
 export const increaseScoreAC = () => {
   return {
     type: INCREASE_SCORE,
+  };
+};
+
+export const setAnswerAC = (answer) => {
+  return {
+    type: SET_ANSWER,
+    payload: answer,
   };
 };
