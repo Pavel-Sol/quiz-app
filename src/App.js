@@ -1,11 +1,11 @@
 import QuestionCard from './components/QuestionCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { getDataAC } from './store/reducer';
+import { getDataAC, getNextQuestionAC } from './store/actions';
 
 function App() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data);
-  // console.log(data);
+  const questionNum = useSelector((state) => state.questionNum);
 
   const fetchData = async () => {
     const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
@@ -15,11 +15,16 @@ function App() {
     dispatch(getDataAC(questions));
   };
 
+  const getNextQuestion = () => {
+    dispatch(getNextQuestionAC());
+  };
+
   return (
     <div className="container">
       <h1>my-quiz</h1>
       <button onClick={() => fetchData()}>start</button>
-      <QuestionCard data={data} />
+      {data && <QuestionCard data={data[questionNum]} />}
+      <div>{data && <button onClick={() => getNextQuestion()}>next</button>}</div>
     </div>
   );
 }
