@@ -1,4 +1,4 @@
-import { GET_DATA, GET_NEXT_QUESTION } from '../type';
+import { SET_DATA, GET_NEXT_QUESTION } from '../type';
 
 const defaultState = {
   data: null,
@@ -7,7 +7,7 @@ const defaultState = {
 
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case GET_DATA:
+    case SET_DATA:
       return { ...state, data: action.payload };
 
     case GET_NEXT_QUESTION:

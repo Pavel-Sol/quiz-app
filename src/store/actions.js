@@ -1,8 +1,9 @@
-import { GET_DATA, GET_NEXT_QUESTION } from './type';
+import { SET_DATA, GET_NEXT_QUESTION } from './type';
+import { shuffleArray } from './../utils';
 
-export const getDataAC = (payload) => {
+export const setDataAC = (payload) => {
   return {
-    type: GET_DATA,
+    type: SET_DATA,
     payload,
   };
 };
@@ -17,8 +18,13 @@ export const fetchQuizQuestions = () => {
   return async (dispatch) => {
     const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
     const json = await res.json();
-
     const questions = await json.results;
-    dispatch(getDataAC(questions));
+
+    const questionsWithMixedAnswers = questions.map((question) => ({
+      ...question,
+      answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
+    }));
+
+    dispatch(setDataAC(questionsWithMixedAnswers));
   };
 };
