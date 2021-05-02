@@ -1,4 +1,12 @@
-import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE, SET_ANSWER, RESET_DATA } from './type';
+import {
+  SET_DATA,
+  GET_NEXT_QUESTION,
+  INCREASE_SCORE,
+  SET_ANSWER,
+  RESET_DATA,
+  SHOW_LOADER,
+  HIDE_LOADER,
+} from './type';
 import { shuffleArray } from './../utils';
 
 export const setDataAC = (payload) => {
@@ -23,6 +31,8 @@ export const getNextQuestionAC = () => {
 
 export const fetchQuizQuestions = () => {
   return async (dispatch) => {
+    dispatch(showLoaderAC());
+
     const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
     const json = await res.json();
     const questions = await json.results;
@@ -33,6 +43,7 @@ export const fetchQuizQuestions = () => {
     }));
 
     dispatch(setDataAC(questionsWithMixedAnswers));
+    dispatch(hideLoaderAC());
   };
 };
 
@@ -47,4 +58,12 @@ export const setAnswerAC = (answer) => {
     type: SET_ANSWER,
     payload: answer,
   };
+};
+
+export const showLoaderAC = () => {
+  return { type: SHOW_LOADER };
+};
+
+export const hideLoaderAC = () => {
+  return { type: HIDE_LOADER };
 };

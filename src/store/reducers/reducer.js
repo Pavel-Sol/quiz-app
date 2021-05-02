@@ -1,4 +1,12 @@
-import { SET_DATA, GET_NEXT_QUESTION, INCREASE_SCORE, SET_ANSWER, RESET_DATA } from '../type';
+import {
+  SET_DATA,
+  GET_NEXT_QUESTION,
+  INCREASE_SCORE,
+  SET_ANSWER,
+  RESET_DATA,
+  SHOW_LOADER,
+  HIDE_LOADER,
+} from '../type';
 
 const defaultState = {
   data: null,
@@ -6,6 +14,7 @@ const defaultState = {
   score: 0,
   currentUserAnswer: '',
   totalQuestions: 10,
+  loading: false,
 };
 
 export const reducer = (state = defaultState, action) => {
@@ -21,6 +30,7 @@ export const reducer = (state = defaultState, action) => {
         score: 0,
         currentUserAnswer: '',
         totalQuestions: 10,
+        loading: false,
       };
 
     case GET_NEXT_QUESTION:
@@ -31,6 +41,12 @@ export const reducer = (state = defaultState, action) => {
 
     case SET_ANSWER:
       return { ...state, currentUserAnswer: action.payload };
+
+    case SHOW_LOADER:
+      return { ...state, loading: true };
+
+    case HIDE_LOADER:
+      return { ...state, loading: false };
 
     default:
       return state;

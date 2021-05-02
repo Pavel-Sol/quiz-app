@@ -1,4 +1,5 @@
 import QuestionCard from './components/QuestionCard';
+import Loader from './components/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { getNextQuestionAC, fetchQuizQuestions, setAnswerAC, resetDataAC } from './store/actions';
 
@@ -9,6 +10,7 @@ function App() {
   const questionNum = useSelector((state) => state.questionNum);
   const totalQuestions = useSelector((state) => state.totalQuestions);
   const userAnswer = useSelector((state) => state.currentUserAnswer);
+  const loading = useSelector((state) => state.loading);
 
   console.log(data);
 
@@ -29,6 +31,7 @@ function App() {
       {!data || totalQuestions - 1 === questionNum ? (
         <button onClick={() => startGame()}>start</button>
       ) : null}
+      {loading && <Loader />}
       {data ? <QuestionCard data={data[questionNum]} /> : null}
       <div>
         {data && userAnswer && totalQuestions - 1 !== questionNum ? (
