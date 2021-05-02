@@ -1,3 +1,5 @@
+import { ThunkAction } from 'redux-thunk';
+
 import {
   SET_DATA,
   GET_NEXT_QUESTION,
@@ -6,30 +8,35 @@ import {
   RESET_DATA,
   SHOW_LOADER,
   HIDE_LOADER,
+  QuizActionType,
+  QuestionItemType
 } from './type';
-import { shuffleArray } from './../utils';
+import { shuffleArray } from '../utils';
+import {RootStateType} from './index'
 
-export const setDataAC = (payload) => {
+
+
+
+export const setDataAC = (payload: null | Array<QuestionItemType>): QuizActionType => {
   return {
     type: SET_DATA,
     payload,
   };
 };
 
-export const resetDataAC = (payload) => {
+export const resetDataAC = (): QuizActionType => {
   return {
     type: RESET_DATA,
-    payload,
   };
 };
 
-export const getNextQuestionAC = () => {
+export const getNextQuestionAC = (): QuizActionType => {
   return {
     type: GET_NEXT_QUESTION,
   };
 };
 
-export const fetchQuizQuestions = () => {
+export const fetchQuizQuestions = (): ThunkAction<void, RootStateType, null, QuizActionType> => {
   return async (dispatch) => {
     dispatch(showLoaderAC());
 
@@ -37,7 +44,7 @@ export const fetchQuizQuestions = () => {
     const json = await res.json();
     const questions = await json.results;
 
-    const questionsWithMixedAnswers = questions.map((question) => ({
+    const questionsWithMixedAnswers = questions.map((question: QuestionItemType) => ({
       ...question,
       answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
     }));
@@ -47,23 +54,23 @@ export const fetchQuizQuestions = () => {
   };
 };
 
-export const increaseScoreAC = () => {
+export const increaseScoreAC = (): QuizActionType => {
   return {
     type: INCREASE_SCORE,
   };
 };
 
-export const setAnswerAC = (answer) => {
+export const setAnswerAC = (answer: string): QuizActionType => {
   return {
     type: SET_ANSWER,
     payload: answer,
   };
 };
 
-export const showLoaderAC = () => {
+export const showLoaderAC = (): QuizActionType => {
   return { type: SHOW_LOADER };
 };
 
-export const hideLoaderAC = () => {
+export const hideLoaderAC = (): QuizActionType => {
   return { type: HIDE_LOADER };
 };

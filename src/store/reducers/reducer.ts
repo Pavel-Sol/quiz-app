@@ -1,3 +1,5 @@
+import {QuizStateType, QuizActionType} from './../type'
+
 import {
   SET_DATA,
   GET_NEXT_QUESTION,
@@ -8,7 +10,7 @@ import {
   HIDE_LOADER,
 } from '../type';
 
-const defaultState = {
+const defaultState: QuizStateType = {
   data: null,
   questionNum: 0,
   score: 0,
@@ -17,7 +19,7 @@ const defaultState = {
   loading: false,
 };
 
-export const reducer = (state = defaultState, action) => {
+export const reducer = (state = defaultState, action: QuizActionType): QuizStateType => {
   switch (action.type) {
     case SET_DATA:
       return { ...state, data: action.payload };
