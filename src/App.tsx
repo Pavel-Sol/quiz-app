@@ -1,16 +1,20 @@
+import { FC } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import QuestionCard from './components/QuestionCard';
 import Loader from './components/Loader';
-import { useSelector, useDispatch } from 'react-redux';
 import { getNextQuestionAC, fetchQuizQuestions, setAnswerAC, resetDataAC } from './store/actions';
+import {RootStateType} from './store'
 
-function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.data);
-  const score = useSelector((state) => state.score);
-  const questionNum = useSelector((state) => state.questionNum);
-  const totalQuestions = useSelector((state) => state.totalQuestions);
-  const userAnswer = useSelector((state) => state.currentUserAnswer);
-  const loading = useSelector((state) => state.loading);
+  const data = useSelector((state: RootStateType) => state.data);
+  const score = useSelector((state: RootStateType) => state.score);
+  const questionNum = useSelector((state: RootStateType) => state.questionNum);
+  const totalQuestions = useSelector((state: RootStateType) => state.totalQuestions);
+  const userAnswer = useSelector((state: RootStateType) => state.currentUserAnswer);
+  const loading = useSelector((state: RootStateType) => state.loading);
+  
 
   console.log(data);
 
@@ -32,7 +36,7 @@ function App() {
         <button onClick={() => startGame()}>start</button>
       ) : null}
       {loading && <Loader />}
-      {data ? <QuestionCard data={data[questionNum]} /> : null}
+      {data ? <QuestionCard data={data[questionNum]} userAnswer={userAnswer}/> : null}
       <div>
         {data && userAnswer && totalQuestions - 1 !== questionNum ? (
           <button onClick={() => getNextQuestion()}>next</button>
