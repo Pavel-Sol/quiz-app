@@ -8,6 +8,7 @@ import {
   RESET_DATA,
   SHOW_LOADER,
   HIDE_LOADER,
+  SET_ERROR
 } from '../type';
 
 const defaultState: QuizStateType = {
@@ -17,6 +18,7 @@ const defaultState: QuizStateType = {
   currentUserAnswer: '',
   totalQuestions: 10,
   loading: false,
+  error: '' 
 };
 
 export const reducer = (state = defaultState, action: QuizActionType): QuizStateType => {
@@ -33,6 +35,7 @@ export const reducer = (state = defaultState, action: QuizActionType): QuizState
         currentUserAnswer: '',
         totalQuestions: 10,
         loading: false,
+        error: ''
       };
 
     case GET_NEXT_QUESTION:
@@ -49,6 +52,9 @@ export const reducer = (state = defaultState, action: QuizActionType): QuizState
 
     case HIDE_LOADER:
       return { ...state, loading: false };
+
+    case SET_ERROR:
+      return { ...state, error: action.payload };
 
     default:
       return state;

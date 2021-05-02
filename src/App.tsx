@@ -14,9 +14,10 @@ const App: FC = () => {
   const totalQuestions = useSelector((state: RootStateType) => state.totalQuestions);
   const userAnswer = useSelector((state: RootStateType) => state.currentUserAnswer);
   const loading = useSelector((state: RootStateType) => state.loading);
+  const errorMsg = useSelector((state: RootStateType) => state.error);
   
 
-  console.log(data);
+  // console.log(data);
 
   const getNextQuestion = () => {
     dispatch(getNextQuestionAC());
@@ -42,6 +43,9 @@ const App: FC = () => {
           <button onClick={() => getNextQuestion()}>next</button>
         ) : null}
       </div>
+      {
+        errorMsg && <div>{errorMsg}</div>
+      }
     </div>
   );
 }

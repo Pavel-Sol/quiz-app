@@ -5,6 +5,7 @@ export const SET_ANSWER = 'SET_ANSWER';
 export const RESET_DATA = 'RESET_DATA';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
+export const SET_ERROR = 'SET_ERROR';
 
 // types TS------------------------------------------
 
@@ -15,6 +16,7 @@ export type QuizStateType = {
   currentUserAnswer: string
   totalQuestions: number
   loading: boolean
+  error: string
 }
 
 export type QuestionItemType = {
@@ -58,6 +60,11 @@ type HideLoaderACType = {
   type: typeof HIDE_LOADER
 }
 
+type SetErrorACType = {
+  type: typeof SET_ERROR
+  payload: string
+}
+
 export type QuizActionType = SetDataACType 
 | ResetDataACType
 | GetNextQuestionACType
@@ -65,3 +72,4 @@ export type QuizActionType = SetDataACType
 | SetAnswerACType
 | ShowLoaderACType
 | HideLoaderACType
+| SetErrorACType

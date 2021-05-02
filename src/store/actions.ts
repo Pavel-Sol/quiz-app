@@ -8,6 +8,7 @@ import {
   RESET_DATA,
   SHOW_LOADER,
   HIDE_LOADER,
+  SET_ERROR,
   QuizActionType,
   QuestionItemType
 } from './type';
@@ -40,16 +41,33 @@ export const fetchQuizQuestions = (): ThunkAction<void, RootStateType, null, Qui
   return async (dispatch) => {
     dispatch(showLoaderAC());
 
-    const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
-    const json = await res.json();
-    const questions = await json.results;
+    try {
+      const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
+      
+      const json = await res.json();
 
-    const questionsWithMixedAnswers = questions.map((question: QuestionItemType) => ({
-      ...question,
-      answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
-    }));
+      if(json.results.length === 0) {
+        throw new Error(`something went wrong`);
+      }
 
-    dispatch(setDataAC(questionsWithMixedAnswers));
+      
+      const questions = await json.results;
+
+      const questionsWithMixedAnswers = questions.map((question: QuestionItemType) => ({
+        ...question,
+        answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
+      }));
+
+      dispatch(setDataAC(questionsWithMixedAnswers));
+
+
+    } catch (error) {
+      // console.log(error.message)
+      dispatch(setErrorAC(error.message))
+      
+    }
+
+    
     dispatch(hideLoaderAC());
   };
 };
@@ -69,6 +87,13 @@ export const setAnswerAC = (answer: string): QuizActionType => {
 
 export const showLoaderAC = (): QuizActionType => {
   return { type: SHOW_LOADER };
+};
+
+export const setErrorAC = (errorMsg: string): QuizActionType => {
+  return { 
+    type: SET_ERROR, 
+    payload: errorMsg 
+  };
 };
 
 export const hideLoaderAC = (): QuizActionType => {
