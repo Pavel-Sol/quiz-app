@@ -51,7 +51,7 @@ export const fetchQuizQuestions = (): ThunkAction<void, RootStateType, null, Qui
       }
 
       
-      const questions = await json.results;
+      const questions: Array<QuestionItemType> = await json.results;
 
       const questionsWithMixedAnswers = questions.map((question: QuestionItemType) => ({
         ...question,
@@ -62,7 +62,7 @@ export const fetchQuizQuestions = (): ThunkAction<void, RootStateType, null, Qui
 
 
     } catch (error) {
-      // console.log(error.message)
+      console.log(error.message)
       dispatch(setErrorAC(error.message))
       
     }

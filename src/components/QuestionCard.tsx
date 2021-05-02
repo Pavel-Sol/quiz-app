@@ -26,7 +26,7 @@ const QuestionCard: FC<Props> = ({ data, userAnswer }) => {
       {data &&
         data.answers.map((answer : string) => {
           return (
-            <div>
+            <div key={answer}>
               <button disabled={userAnswer ? true : false} value={answer} onClick={acceptAnswer}>
                 {answer}
               </button>

@@ -15,9 +15,6 @@ const App: FC = () => {
   const userAnswer = useSelector((state: RootStateType) => state.currentUserAnswer);
   const loading = useSelector((state: RootStateType) => state.loading);
   const errorMsg = useSelector((state: RootStateType) => state.error);
-  
-
-  // console.log(data);
 
   const getNextQuestion = () => {
     dispatch(getNextQuestionAC());
