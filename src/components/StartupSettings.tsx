@@ -24,23 +24,23 @@ const StartupSettings: FC = () => {
     }
 
    return(
-      <div>
-         <div className='difficulty'>
-            <select onChange={selectDifficulty}>
+      <div className='setting'>
+         <div className='setting__difficulty'>
+            <select className='setting__select' onChange={selectDifficulty}>
                <option value="easy">Easy</option>
                <option value="medium">Medium</option>
                <option value="hard">Hard</option>
             </select>
          </div>
 
-         <div className='quantity'>
-            <select onChange={selectAmount}>
+         <div className='setting__quantity'>
+            <select className='setting__select' onChange={selectAmount}>
                <option value="10">10</option>
                <option value="20">20</option>
                <option value="30">30</option>
             </select>
          </div>
-         <button onClick={() => startGame(difficulty, amount)}>start</button>
+         <button className='btn-start' onClick={() => startGame(difficulty, amount)}>start</button>
       </div>
    )
 }

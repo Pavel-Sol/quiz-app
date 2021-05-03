@@ -1,6 +1,8 @@
+
 import React, { FC } from 'react';
 import {useDispatch } from 'react-redux';
 
+import {checkAnswer} from './../utils'
 import { increaseScoreAC, setAnswerAC } from '../store/actions';
 import {QuestionItemType} from './../store/type'
 
@@ -21,13 +23,13 @@ const QuestionCard: FC<Props> = ({ data, userAnswer }) => {
 
   return (
     <div className="card">
-      <h3>QuestionCard</h3>
-      {data && <div>{data.question}</div>}
+      {data && <p className='card__question'>{data.question}</p>}
       {data &&
         data.answers.map((answer : string) => {
           return (
             <div key={answer}>
-              <button disabled={userAnswer ? true : false} value={answer} onClick={acceptAnswer}>
+              <button className={checkAnswer(answer, userAnswer, data.correct_answer)} 
+              disabled={userAnswer ? true : false} value={answer} onClick={acceptAnswer}>
                 {answer}
               </button>
             </div>

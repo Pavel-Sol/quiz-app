@@ -24,8 +24,9 @@ const App: FC = () => {
 
   return (
     <div className="container">
-      <h1>my-quiz</h1>
-      {data ? <div>SCORE: {score}</div> : null}
+      <h1 className='title'>quiz-app</h1>
+      {data ? <div className='score'>score: {score}</div> : null}
+      {data ? <div className='total'>total:  {questionNum + 1} / {totalQuestions}</div> : null}
       {!data || totalQuestions - 1 === questionNum ? (
         <StartupSettings />
       ) : null}
@@ -33,7 +34,7 @@ const App: FC = () => {
       {data ? <QuestionCard data={data[questionNum]} userAnswer={userAnswer}/> : null}
       <div>
         {data && userAnswer && totalQuestions - 1 !== questionNum ? (
-          <button onClick={() => getNextQuestion()}>next</button>
+          <button className='btn-next' onClick={() => getNextQuestion()}>next</button>
         ) : null}
       </div>
       {
