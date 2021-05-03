@@ -37,12 +37,12 @@ export const getNextQuestionAC = (): QuizActionType => {
   };
 };
 
-export const fetchQuizQuestions = (): ThunkAction<void, RootStateType, null, QuizActionType> => {
+export const fetchQuizQuestions = (difficulty: string, amount: string): ThunkAction<void, RootStateType, null, QuizActionType> => {
   return async (dispatch) => {
     dispatch(showLoaderAC());
 
     try {
-      const res = await fetch(`https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`);
+      const res = await fetch(`https://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple`);
       
       const json = await res.json();
 

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import QuestionCard from './components/QuestionCard';
 import Loader from './components/Loader';
-import { getNextQuestionAC, fetchQuizQuestions, setAnswerAC, resetDataAC } from './store/actions';
+import StartupSettings from './components/StartupSettings'
+import { getNextQuestionAC, setAnswerAC,} from './store/actions';
 import {RootStateType} from './store'
 
 const App: FC = () => {
@@ -21,17 +22,12 @@ const App: FC = () => {
     dispatch(setAnswerAC(''));
   };
 
-  const startGame = () => {
-    dispatch(resetDataAC());
-    dispatch(fetchQuizQuestions());
-  };
-
   return (
     <div className="container">
       <h1>my-quiz</h1>
       {data ? <div>SCORE: {score}</div> : null}
       {!data || totalQuestions - 1 === questionNum ? (
-        <button onClick={() => startGame()}>start</button>
+        <StartupSettings />
       ) : null}
       {loading && <Loader />}
       {data ? <QuestionCard data={data[questionNum]} userAnswer={userAnswer}/> : null}
