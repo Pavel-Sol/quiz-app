@@ -8,7 +8,8 @@ import {
   RESET_DATA,
   SHOW_LOADER,
   HIDE_LOADER,
-  SET_ERROR
+  SET_ERROR,
+  SET_TOTAL_QUESTIONS
 } from '../type';
 
 const defaultState: QuizStateType = {
@@ -55,6 +56,9 @@ export const reducer = (state = defaultState, action: QuizActionType): QuizState
 
     case SET_ERROR:
       return { ...state, error: action.payload };
+
+    case SET_TOTAL_QUESTIONS: 
+    return {...state, totalQuestions: action.payload}
 
     default:
       return state;

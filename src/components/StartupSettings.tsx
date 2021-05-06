@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import {useDispatch } from 'react-redux';
 import {useState} from 'react'
 
-import {fetchQuizQuestions, resetDataAC} from './../store/actions'
+import {fetchQuizQuestions, resetDataAC,} from './../store/actions'
 
 const StartupSettings: FC = () => {
    const dispatch = useDispatch()
    const [difficulty, setDifficulty] = useState('easy')
-   const [amount, setAmount] = useState('10')
+   const [amount, setAmount] = useState(10)
 
-   const startGame = (difficulty: string, amount: string) => {
+   const startGame = (difficulty: string, amount: number) => {
       dispatch(resetDataAC());
       dispatch(fetchQuizQuestions(difficulty, amount));
     };
@@ -20,7 +20,7 @@ const StartupSettings: FC = () => {
     }
 
     const selectAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setAmount(e.target.value)
+      setAmount(+e.target.value)
     }
 
    return(

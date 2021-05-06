@@ -9,6 +9,7 @@ import {
   SHOW_LOADER,
   HIDE_LOADER,
   SET_ERROR,
+  SET_TOTAL_QUESTIONS,
   QuizActionType,
   QuestionItemType
 } from './type';
@@ -37,7 +38,7 @@ export const getNextQuestionAC = (): QuizActionType => {
   };
 };
 
-export const fetchQuizQuestions = (difficulty: string, amount: string): ThunkAction<void, RootStateType, null, QuizActionType> => {
+export const fetchQuizQuestions = (difficulty: string, amount: number): ThunkAction<void, RootStateType, null, QuizActionType> => {
   return async (dispatch) => {
     dispatch(showLoaderAC());
 
@@ -58,6 +59,7 @@ export const fetchQuizQuestions = (difficulty: string, amount: string): ThunkAct
         answers: shuffleArray([...question.incorrect_answers, question.correct_answer]),
       }));
 
+      dispatch(setTotalQuestionsAC(amount))
       dispatch(setDataAC(questionsWithMixedAnswers));
 
 
@@ -99,3 +101,10 @@ export const setErrorAC = (errorMsg: string): QuizActionType => {
 export const hideLoaderAC = (): QuizActionType => {
   return { type: HIDE_LOADER };
 };
+
+export const setTotalQuestionsAC =(amount: number): QuizActionType => {
+  return {
+    type : SET_TOTAL_QUESTIONS,
+    payload: amount
+  }
+}

@@ -6,6 +6,7 @@ export const RESET_DATA = 'RESET_DATA';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
 export const SET_ERROR = 'SET_ERROR';
+export const SET_TOTAL_QUESTIONS = 'SET_TOTAL_QUESTIONS'
 
 // types TS------------------------------------------
 
@@ -65,6 +66,11 @@ type SetErrorACType = {
   payload: string
 }
 
+type setTotalQuestionsACType = {
+  type: typeof SET_TOTAL_QUESTIONS
+  payload: number
+}
+
 export type QuizActionType = SetDataACType 
 | ResetDataACType
 | GetNextQuestionACType
@@ -73,3 +79,4 @@ export type QuizActionType = SetDataACType
 | ShowLoaderACType
 | HideLoaderACType
 | SetErrorACType
+| setTotalQuestionsACType
