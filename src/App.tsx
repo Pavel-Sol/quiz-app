@@ -17,8 +17,6 @@ const App: FC = () => {
   const loading = useSelector((state: RootStateType) => state.loading);
   const errorMsg = useSelector((state: RootStateType) => state.error);
 
-  console.log(data)
-  console.log(totalQuestions)
 
   const getNextQuestion = () => {
     dispatch(getNextQuestionAC());
